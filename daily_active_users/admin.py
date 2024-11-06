@@ -1,15 +1,12 @@
-# Django
-from django.contrib import admin
-from django.http.response import HttpResponse
-from django.utils.safestring import mark_safe
-
-# Standard Library
 import csv
 import json
 from itertools import chain
 
-# MuckRock
-from muckrock.daily_active_users.models import DailyActiveUser
+from django.contrib import admin
+from django.http.response import HttpResponse
+from django.utils.safestring import mark_safe
+
+from daily_active_users.models import DailyActiveUser
 
 
 @admin.register(DailyActiveUser)

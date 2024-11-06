@@ -1,15 +1,14 @@
-# Django
-from django.db import models
-
-# Standard Library
 from datetime import date
+
+from django.conf import settings
+from django.db import models
 
 
 class DailyActiveUser(models.Model):
     """A log of user activity per day"""
 
     user = models.ForeignKey(
-        "auth.User",
+        settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
         related_name="+",
     )

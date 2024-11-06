@@ -1,11 +1,8 @@
-# Django
-from django.db.models.expressions import F
-
-# Standard Library
 from datetime import date
 
-# MuckRock
-from muckrock.daily_active_users.models import DailyActiveUser
+from django.db.models.expressions import F
+
+from daily_active_users.models import DailyActiveUser
 
 
 class DailyActiveUserMiddleware:
