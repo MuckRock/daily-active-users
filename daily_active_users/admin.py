@@ -30,19 +30,20 @@ class DailyActiveUserAdmin(admin.ModelAdmin):
         """Export daily active users"""
 
         meta = self.model._meta
-        field_names = [
-            "user",
-            "date",
+        fields = [
+            ("user", lambda x: x.user.username),
+            ("email", lambda x: x.user.email),
+            ("date", lambda x: x.date),
         ]
 
         response = HttpResponse(content_type="text/csv")
         response["Content-Disposition"] = f"attachment; filename={meta}.csv"
         writer = csv.writer(response)
 
-        writer.writerow(field_names)
+        writer.writerow(name for name, _ in fields)
         for obj in queryset:
             writer.writerow(
-                [getattr(obj, field) for field in field_names]
+                [func(obj) for _, func in fields]
                 + list(
                     chain(
                         *[[m["name"], m["plan"]] for m in obj.metadata["organizations"]]
